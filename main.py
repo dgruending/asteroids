@@ -1,5 +1,6 @@
 import pygame
 from constants import *
+from player import Player
 
 def main():
     pygame.init()
@@ -7,6 +8,8 @@ def main():
 
     game_clock = pygame.time.Clock()
     delta_time = 0
+            
+    player = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
 
     # Game loop
     while True:
@@ -15,8 +18,11 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
-        # Black screen
+        player.update(delta_time)
+
+        # Rendering
         screen.fill("black")
+        player.draw(screen)
         pygame.display.flip()
 
         delta_time = game_clock.tick(60) / 1000
